@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics.Metrics;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
 namespace Garage_1._0.src
 {
+    //Todo: För att få tooltips i VS - lägg XML-sammanfattning på klassen och några nyckelmetoder:
 
+    /// <summary>
+    /// Representerar ett garage med en fast kapacitet som lagrar fordon i en intern array.
+    /// </summary>
+  
     // Det ska gå att iterera över en instans av Garage med foreach, därför måste klassen implementera IEnumerable<T> som foreach kräver.
     // IEnumerable<T> specar metoden GetEnumerator(), som exponerar en iterator som foreach behöver, den måste därför implementeras här.
     // Implementationen av GetEnumerator() nedan loopar igenom arrayen och returnerar varje T-objekt (Vehicle), ett i taget med en 'yield return',
@@ -55,7 +61,7 @@ namespace Garage_1._0.src
         public Garage(int capacity)
         {
             if (capacity <= 0)
-                throw new ArgumentException("Capacity måste vara större än noll!.", nameof(capacity)); // Ett garage måste ha minst 1 plats 
+                throw new ArgumentOutOfRangeException(nameof(capacity), "Capacity måste vara större än noll."); // Ett garage måste ha minst 1 plats 
 
             _vehicles = new T?[capacity];  // Skapar upp den interna Vehicle-arrayen, med capacity antal platser                                          
         }
@@ -100,13 +106,15 @@ namespace Garage_1._0.src
 
         public UnparkResult RemoveByRegNumber(string regNumber) // Todo: Om Vehicle med registrationNumber saknas - bara returnera false, kasta ett fel eller kanske både returnera false och en out string message?
         {
+            regNumber = regNumber.ToUpper();  // Gör om till upper case så det alltid stämmer med lagrat reg.nummer 
+
             if (!IsEmpty) // Om det finns fordon i garaget
             {
                 for (int i = 0; i < _vehicles.Length; i++)
                 {
-                    if (_vehicles[i]?.RegistrationNumber == regNumber)            // Ta bort vehicle med .regNumber ur _vehicles 
+                    if (_vehicles[i]?.RegistrationNumber == regNumber)            
                     {
-                        _vehicles[i] = null;
+                        _vehicles[i] = null;                              // Tar bort vehicle med .regNumber ur _vehicles 
                         return UnparkResult.Success;
                     }
                 }
@@ -119,6 +127,7 @@ namespace Garage_1._0.src
 
         public T? FindVehicleByRegNumber(string regNumber)
         {
+            regNumber = regNumber.ToUpper();
 
             for (int i = 0; i < _vehicles.Length; i++)
             {
@@ -131,6 +140,14 @@ namespace Garage_1._0.src
             return null; // Fordon med regNumber saknas och/eller garaget är tomt
         }
 
+        public IEnumerable<T> FindByProperties(VehicleType? type = null, int? noOfWheels = null, string? color = null)
+        {
+            return this.Where(v =>
+                (type == null || v.VehicleType == type) &&
+                (noOfWheels == null || v.NumberOfWheels == noOfWheels) &&
+                (color == null || v.Color.Equals(color, StringComparison.OrdinalIgnoreCase))
+            );
+        }
     }
 
 }

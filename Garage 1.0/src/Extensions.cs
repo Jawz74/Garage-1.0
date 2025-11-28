@@ -31,7 +31,7 @@ namespace Garage_1._0.src
 
     }
 
-    internal static class FuelTypeExtensions   // Todo: Flytta FuelTypeExtensions till egen fil
+    internal static class FuelTypeExtensions   
     {
         public static string ToStringSWE(this FuelType fuelType)
         {

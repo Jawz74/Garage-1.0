@@ -13,6 +13,7 @@ namespace Garage_1._0.src
 
         public Airplane(string registrationNumber, int numberOfWheels, string color, int numberOfEngines) : base(registrationNumber, numberOfWheels, color)
         {
+            ArgumentOutOfRangeException.ThrowIfNegative(NumberOfEngines);  // Antal motorer = 0 är ok, Segelflygplan etc. Men kasta fel om antalet motorer < 0
             VehicleType = VehicleType.Airplane;
             NumberOfEngines = numberOfEngines;
         }

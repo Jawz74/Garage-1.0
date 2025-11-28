@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,9 +15,11 @@ namespace Garage_1._0.src
 
         public string SetInput { get; set; } = "1";  // Kan sättas till valfritt värde inifrån testet (tex expected), motsvarar readline() i metoder
 
+        public string SetOutput { get; set; } = "";  // Kan hämtas inifrån testet (tex expected), motsvarar writeline() i metoder
+
         public void ClearScreen()
         {
-            throw new NotImplementedException();
+            
         }
 
         public int Read()
@@ -26,17 +29,17 @@ namespace Garage_1._0.src
 
         public string ReadLine()
         {
-            throw new NotImplementedException();
+            return SetInput;
         }
 
         public void Write(string text = "")
         {
-            throw new NotImplementedException();
+            SetOutput = text;
         }
 
         public void WriteLine(string text = "")
         {
-            throw new NotImplementedException();
+            SetOutput = text;
         }
 
         

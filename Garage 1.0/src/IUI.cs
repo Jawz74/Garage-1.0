@@ -6,7 +6,7 @@
 
     //Todo: Lägg denna och ärvande klasser i underprojekt .Abstractions, Getinput() och SetInput() här?
 
-    internal interface IUI
+    public interface IUI
     {
         void ClearScreen();
         int Read();

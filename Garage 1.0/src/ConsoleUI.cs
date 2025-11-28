@@ -26,7 +26,7 @@ namespace Garage_1._0.src
 
         public string ReadLine()  
         {
-            return Console.ReadLine()!;
+            return Console.ReadLine() ?? string.Empty;
         }
 
         public int Read() // Todo: Tveksam. Man bör inte exponera ett lågnivå-Console-API i ett abstraktionslager. Behåll endast ReadLine().
