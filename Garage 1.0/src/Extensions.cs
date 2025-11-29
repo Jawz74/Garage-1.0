@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Garage_1._0.src
+﻿namespace Garage_1._0.src
 {
     internal static class VehicleTypeExtensions
     {
@@ -15,7 +9,7 @@ namespace Garage_1._0.src
                 case VehicleType.Car:
                     return "Bil";
                 case VehicleType.Airplane:
-                    return "Flygplan";    
+                    return "Flygplan";
                 case VehicleType.Bus:
                     return "Buss";
                 case VehicleType.Motorcycle:
@@ -31,7 +25,7 @@ namespace Garage_1._0.src
 
     }
 
-    internal static class FuelTypeExtensions   
+    internal static class FuelTypeExtensions
     {
         public static string ToStringSWE(this FuelType fuelType)
         {

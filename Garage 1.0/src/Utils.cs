@@ -1,5 +1,4 @@
 ﻿using Garage_1._0.src;
-using System.ComponentModel;
 
 namespace Garage_1._0
 {
@@ -12,7 +11,7 @@ namespace Garage_1._0
 
             do
             {
-                if(!string.IsNullOrWhiteSpace(prompt)) // Tom prompt skrivs ej ut
+                if (!string.IsNullOrWhiteSpace(prompt)) // Tom prompt skrivs ej ut
                     ui.WriteLine($"{prompt}");
 
                 input = ui.ReadLine().Trim();
@@ -70,16 +69,16 @@ namespace Garage_1._0
         public static VehicleType ReadVehicleTypeAsInt(string prompt, IUI ui)
         {
             do
-            {                
+            {
                 int input = ReadPositiveInt(prompt, ui);   // Om inmatad siffra >= 0 
 
                 if (Enum.IsDefined(typeof(VehicleType), input))   // Om siffran ligger bakom en VehicleType
                 {
-                    return (VehicleType)input; 
+                    return (VehicleType)input;
                 }
                 else
-                {                    
-                    ui.WriteLine($"Felaktig fordonstyp. Försök igen. \n"); 
+                {
+                    ui.WriteLine($"Felaktig fordonstyp. Försök igen. \n");
                 }
             }
             while (true);
@@ -112,12 +111,12 @@ namespace Garage_1._0
             ui.ReadLine();
             ui.ClearScreen();
         }
- 
+
         // Ger false vid all input förutom "J"
         public static bool ReadYes(string prompt, IUI ui)
         {
             ui.WriteLine(prompt + " (J = Ja, Enter = Nej):");
-            string input = ui.ReadLine().Trim().ToUpper(); 
+            string input = ui.ReadLine().Trim().ToUpper();
             return input == "J";
         }
 

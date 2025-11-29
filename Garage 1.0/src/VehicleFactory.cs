@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System;
-using Garage_1._0.src;
-
-namespace Garage_1._0.src.Factories
+﻿namespace Garage_1._0.src.Factories
 {
     internal static class VehicleFactory
     {
@@ -19,8 +10,8 @@ namespace Garage_1._0.src.Factories
 
             string regNo = baseInfo.RegistrationNumber;
             int noOfwheels = baseInfo.NumberOfWheels;
-            string color = baseInfo.Color;          
-           
+            string color = baseInfo.Color;
+
             Vehicle? vehicle = null;
 
             // Hämta objektspecifik info och skapa rätt objekt
@@ -45,7 +36,7 @@ namespace Garage_1._0.src.Factories
                     vehicle = new Vehicle(regNo, noOfwheels, color);
                     break;
                 default:
-                    throw new NotSupportedException($"Okänd fordonstyp!: {vehicleType}");                    
+                    throw new NotSupportedException($"Okänd fordonstyp!: {vehicleType}");
             }
 
             return vehicle;

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Garage_1._0.src
+﻿namespace Garage_1._0.src
 {
     public class Vehicle : IVehicle
     {
@@ -22,7 +15,7 @@ namespace Garage_1._0.src
         {
             // Om regnr saknas eller antal hjul <= 0, kasta fel.
             ArgumentException.ThrowIfNullOrWhiteSpace(registrationNumber);   // Todo: Måste hantera kastade fel någonstans - var ?
-            ArgumentOutOfRangeException.ThrowIfNegative(numberOfWheels);
+            ArgumentOutOfRangeException.ThrowIfNegative(numberOfWheels);    // Todo: kasta exceptions med if .. och throw new för mer information i meddelandet 
 
             RegistrationNumber = registrationNumber.ToUpper();
             NumberOfWheels = numberOfWheels;

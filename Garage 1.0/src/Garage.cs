@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Diagnostics.Metrics;
-using System.Dynamic;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
+﻿using System.Collections;
 
 namespace Garage_1._0.src
 {
@@ -12,7 +7,7 @@ namespace Garage_1._0.src
     /// <summary>
     /// Representerar ett garage med en fast kapacitet som lagrar fordon i en intern array.
     /// </summary>
-  
+
     // Det ska gå att iterera över en instans av Garage med foreach, därför måste klassen implementera IEnumerable<T> som foreach kräver.
     // IEnumerable<T> specar metoden GetEnumerator(), som exponerar en iterator som foreach behöver, den måste därför implementeras här.
     // Implementationen av GetEnumerator() nedan loopar igenom arrayen och returnerar varje T-objekt (Vehicle), ett i taget med en 'yield return',
@@ -23,6 +18,8 @@ namespace Garage_1._0.src
 
     public class Garage<T> : IEnumerable<T> where T : Vehicle // Den generiska typen T begränsas här till Vehicle (med where).
     {
+        // Todo: Ändra T till IVehicle för ännu mer flexibilitet?
+
         // Fält
         private readonly T?[] _vehicles;   // Intern lagring av Vehichles i en array, som även kan innehålla null = tomma parkeringsplatser.
 
@@ -104,7 +101,7 @@ namespace Garage_1._0.src
             return ParkResult.GarageFull;
         }
 
-        public UnparkResult RemoveByRegNumber(string regNumber) // Todo: Om Vehicle med registrationNumber saknas - bara returnera false, kasta ett fel eller kanske både returnera false och en out string message?
+        public UnparkResult RemoveByRegNumber(string regNumber)
         {
             regNumber = regNumber.ToUpper();  // Gör om till upper case så det alltid stämmer med lagrat reg.nummer 
 
@@ -112,7 +109,7 @@ namespace Garage_1._0.src
             {
                 for (int i = 0; i < _vehicles.Length; i++)
                 {
-                    if (_vehicles[i]?.RegistrationNumber == regNumber)            
+                    if (_vehicles[i]?.RegistrationNumber == regNumber)
                     {
                         _vehicles[i] = null;                              // Tar bort vehicle med .regNumber ur _vehicles 
                         return UnparkResult.Success;

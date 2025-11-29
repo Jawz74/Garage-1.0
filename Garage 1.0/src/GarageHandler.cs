@@ -1,13 +1,5 @@
 ﻿using Garage_1._0.src.Factories;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Garage_1._0.src
 {
@@ -44,27 +36,22 @@ namespace Garage_1._0.src
 
         internal void Run()
         {
-            CreateGarageMenu();
-            SeedGarage();
-            CreateMainMenu();
+            try
+            {
+                CreateGarageMenu();
+                SeedGarage();
+                CreateMainMenu();
+            }
+            catch (Exception ex)
+            {
+                _ui.WriteLine("Ett oväntat fel inträffade:");
+                _ui.WriteLine(ex.Message);
+                _ui.ReadLine();
+            }
+
+            //CreateGarageMenu();
+            //CreateMainMenu();
         }
-
-        //private void CreateGarage()
-        //{
-        //    // Todo: Meny enligt följande
-
-        //    // Välkommen till Garage 1.0!
-        //    //
-        //    // Var god välj något av följande:
-        //    //
-        //    // 1. Skapa ett standardgarage med 20 platser och 10 parkerade fordon.
-        //    // 2. Skapa ett eget tomt garage med valfritt antal parkeringsplatser.
-        //    // 0. Avsluta
-
-        //    int input = Utils.ReadPositiveInt("Ange antalet platser i garaget:", _ui);
-        //    _garage = new Garage<Vehicle>(capacity: input);
-
-        //}
 
         private void CreateGarageMenu()
         {
@@ -107,12 +94,11 @@ namespace Garage_1._0.src
 
         private void SeedGarage() // Todo: Ev. flytta till en egen klass
         {
-            // Todo: Seed:a garaget med Vehicles
-            _garage.Park(new Airplane("KDP523", 3, "Vit", 2));           
+            _garage.Park(new Airplane("KDP523", 3, "Vit", 2));
             _garage.Park(new Boat("DEF234", "Blå", 20.33m));
             _garage.Park(new Boat("LOL111", "Blå", 0.33m));
             _garage.Park(new Bus("ABC323", 8, "Grön", 25));
-            _garage.Park(new Bus("FFS333", 6, "Grön", 10)); 
+            _garage.Park(new Bus("FFS333", 6, "Grön", 10));
             _garage.Park(new Car("ABC123", 4, "Silver", FuelType.Gasoline));
             _garage.Park(new Car("SSS666", 4, "Rosa", FuelType.Diesel));
             _garage.Park(new Motorcycle("GHT423", 2, "Svart", 2000));
@@ -228,7 +214,7 @@ namespace Garage_1._0.src
         private void SearchByRegNo()
         {
 
-            string regNo = Utils.ReadString("Ange registreringsnumret på fordonet ('0' - Avbryt):", _ui); // Todo: använd helper.metod för att kolla input
+            string regNo = Utils.ReadString("Ange registreringsnumret på fordonet ('0' - Avbryt):", _ui); // Todo: använd helper metod för att kolla regnr. input
 
             regNo = String.Concat(regNo.Where(c => !Char.IsWhiteSpace(c)));  // Todo: Lägg i Extensionmetod
 
